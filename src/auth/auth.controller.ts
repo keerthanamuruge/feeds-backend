@@ -1,9 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, ConflictException, Controller, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
-
-
+import { HttpCode } from '@nestjs/common';
 
 export interface ICreateResponse {
     status: number;
@@ -22,14 +21,18 @@ export class AuthController {
 
     @ApiTags('register')
     @Post('register')
-    async create(@Body() UserDto: RegisterDto) {
+    async create(@Body() UserDto: RegisterDto, @Res() res) {
         // const existingUser:ICreateResponse  = await this.authService.createUser(UserDto)
         const existingUser: ICreateResponse = await this.authService.findByEmail(UserDto.email);
         if (existingUser) {
-            return{ message : 'Email already registered'};
+            throw new ConflictException('Email already exists');
+            // return{ message : 'Email already registered', statusCode:409};
         }
         await this.authService.createUser(UserDto);
-        return {message :'Registration successful'};
+        return res.status(201).json({
+            statusCode: 201,
+            message: 'Registration successful',
+          });
         // return res;
     }
 

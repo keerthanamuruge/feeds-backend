@@ -5,6 +5,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
 import { json, urlencoded } from 'express';
+import "dotenv/config";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -22,7 +23,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', '..', 'coverage'));
 
   const swaggerCconfig = new DocumentBuilder()
-  .setTitle('eSense Api')
+  .setTitle('Feeds Api')
   .setVersion('1.0')
   .addBearerAuth(
     {
@@ -38,6 +39,6 @@ async function bootstrap() {
   .build();
   const swagger = SwaggerModule.createDocument(app,swaggerCconfig)
   SwaggerModule.setup('api/v1', app, swagger);
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();

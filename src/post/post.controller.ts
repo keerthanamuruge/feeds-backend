@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PageDto, PostDto, YourFeedDto } from './dto/post.dto';
 import { PostService } from './post.service';
-
+import { AuthGuard } from '../authorization/auth.guard';
 
 export interface ICreateResponse {
     status: number;
@@ -16,7 +16,6 @@ export class PostController {
     constructor(private readonly postService: PostService) {
 
     }
-
 
     @ApiTags('insertFeed')
     @Post('')

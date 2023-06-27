@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'feedback.Post'})
+@Entity({name: 'feedback.post'})
 
 export class Post {
     @PrimaryGeneratedColumn('increment',{type:'int',name: "id"})

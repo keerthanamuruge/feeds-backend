@@ -5,6 +5,7 @@ import { User } from './Entites/user.entites';
 import { RegisterDto } from './dto/auth.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { HttpCode } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -13,12 +14,6 @@ export class AuthService {
     constructor(private readonly jwtservice : JwtService,  @InjectRepository(User) private readonly userRepository: Repository<User>){
 
     }
-
-
-
-
-
-
     async createUser(user: RegisterDto): Promise<any> {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         const password = {password: hashedPassword}

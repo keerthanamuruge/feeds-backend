@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'feedback.Comments'})
+@Entity({name: 'feedback.comments'})
 
 export class Comment {
     @PrimaryGeneratedColumn('increment',{type:'int',name: "id"})
