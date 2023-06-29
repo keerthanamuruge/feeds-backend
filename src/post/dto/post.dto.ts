@@ -51,6 +51,21 @@ export class PostDto {
 
 }
 
+export class Translate {
+    @ApiProperty()
+    @IsString()
+    body: string;
+
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
+    lang: string;
+
+    @ApiProperty()
+    @IsString()
+    title: string;
+}
+
 export class PageDto {
 
     @ApiProperty()

@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { PageDto, PostDto, YourFeedDto } from './dto/post.dto';
+import { PageDto, PostDto, Translate, YourFeedDto } from './dto/post.dto';
 import { PostService } from './post.service';
 import { AuthGuard } from '../authorization/auth.guard';
 
@@ -36,5 +36,12 @@ export class PostController {
     async getYourFeed(@Body() pagination : YourFeedDto) {
         const res: ICreateResponse = await this.postService.getYourPost(pagination)
         return res;
+    }
+
+    @ApiTags('getTranslate')
+    @Post('/translate')
+    async getTranslate(@Body() data: Translate){
+        const res: ICreateResponse = await this.postService.getPostTranslate(data)
+        return res
     }
 }
